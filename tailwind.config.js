@@ -13,6 +13,9 @@ module.exports = {
         extend: {
             colors: {
                 gray: colors.warmGray,
+                primary: colors.violet['700'],
+                'primary-light': colors.violet['400'],
+                'primary-dark': colors.violet['900'],
             },
         },
     },
