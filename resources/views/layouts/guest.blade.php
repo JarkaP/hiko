@@ -4,18 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Styles -->
+        <title>{{ config('app.name') }}</title>
         <link rel="stylesheet" href="{{ asset('dist/app.css') }}">
-
-        <!-- Scripts -->
         <script src="{{ asset('dist/app.js') }}" defer></script>
     </head>
-    <body>
-        <div class="font-sans antialiased text-gray-900">
-            {{ $slot }}
-        </div>
+    <body class="px-6 font-sans antialiased text-gray-900 bg-gray-100">
+        {{ $slot }}
     </body>
 </html>
