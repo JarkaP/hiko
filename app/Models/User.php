@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->roleHasAbility($this->role, $ability);
     }
+
+    public function isDeactivated()
+    {
+        return is_null($this->deactivated_at) ? false : true;
+    }
 }
