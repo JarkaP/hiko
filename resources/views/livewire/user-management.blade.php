@@ -6,6 +6,7 @@
         </x-buttons.simple>
         <x-dialog title="{{ __('Nový uživatel') }}" slug="newUserDialog">
             <form wire:submit.prevent="create">
+                @csrf
                 <x-label for="name" :value="__('Jméno')" class="mt-4" />
                 <x-input wire:model.defer="name" id="name" class="block w-full mt-1" type="text" name="name" required />
                 @error('name')
@@ -74,7 +75,26 @@
                             {{ $user->isDeactivated() }}
                         </td>
                         <td class="px-4 py-2 text-sm border-b">
-                            Odstranit
+                            <div x-data="{ deleteUserDialog: false }" @keydown.escape="deleteUserDialog = false"
+                                x-init="$watch('deleteUserDialog', toggleBodyOverflow)">
+                                <button type="button" class="text-red-600" type="button" x-on:click="deleteUserDialog = true">
+                                    {{ __('Odstranit') }}
+                                </button>
+                                <x-dialog title="{{ $user->name }}" slug="deleteUserDialog">
+                                    <p class="text-red-600">
+                                        Odstraní všechna data o uživateli! Chcete pokračovat?
+                                    </p>
+                                    <form wire:submit.prevent="delete({{ $user->id }})">
+                                        @csrf
+                                        <x-buttons.simple class="w-full mt-6 mb-2 bg-red-700" wire:loading.attr="disabled">
+                                            {{ __('Odstranit uživatele') }}
+                                        </x-buttons.simple>
+                                    </form>
+                                    <span wire:loading wire:target="delete">
+                                        Odesílám
+                                    </span>
+                                </x-dialog>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

@@ -34,7 +34,16 @@ class UserManagement extends Component
         $user->save();
         $user->notify(new NewUserPasswordCreate($user));
 
-        session()->flash('success', 'Uživatel ' . $this->name . ' byl úspěšně vytvořen.');
+        session()->flash('success', 'Uživatel/ka  ' . $this->name . ' byl/a úspěšně vytvořen/a.');
+        return redirect()->route('users');
+    }
+
+    public function delete($userId)
+    {
+        $user = User::find($userId);
+        $user->delete();
+
+        session()->flash('success', 'Uživatel/ka byl/a úspěšně odstraněn/a.');
         return redirect()->route('users');
     }
 
