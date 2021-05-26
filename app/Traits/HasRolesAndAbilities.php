@@ -16,7 +16,7 @@ trait HasRolesAndAbilities
                 ],
             ],
             'editor' => [
-                'label' => 'editor',
+                'label' => 'Editor',
                 'abilities' => [
                     'manage-metadata',
                     'view-metadata',

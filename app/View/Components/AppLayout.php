@@ -51,7 +51,7 @@ class AppLayout extends Component
                 'ability' => 'view-metadata',
             ],
             [
-                'route' => 'dashboard',
+                'route' => 'users',
                 'name' => __('Uživatelé'),
                 'icon' => 'heroicon-o-user-add',
                 'ability' => 'manage-users',

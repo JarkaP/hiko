@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return is_null($this->deactivated_at) ? false : true;
     }
+
+    public function roleName()
+    {
+        return $this->roles()[$this->role]['label'];
+    }
 }
