@@ -1,10 +1,39 @@
 <div>
-    <div x-data="{formVisible: false}">
-        <x-buttons.simple class="mb-4" type="button">
-            <span x-on:click="">
-                {{ __('Nový uživatel') }}
-            </span>
+    <div x-data="{ newUserDialog: false }" @keydown.escape="newUserDialog = false"
+        x-init="$watch('newUserDialog', toggleBodyOverflow)">
+        <x-buttons.simple class="mb-4" type="button" x-on:click="newUserDialog = true">
+            {{ __('Nový uživatel') }}
         </x-buttons.simple>
+        <x-dialog title="{{ __('Nový uživatel') }}" slug="newUserDialog">
+            <form wire:submit.prevent="create">
+                <x-label for="name" :value="__('Jméno')" class="mt-4" />
+                <x-input wire:model.defer="name" id="name" class="block w-full mt-1" type="text" name="name" required />
+                @error('name')
+                    <div class="text-red-600">{{ $message }}</div>
+                @enderror
+                <x-label for="email" :value="__('E-mail')" class="mt-4" />
+                <x-input wire:model.defer="email" id="email" class="block w-full mt-1" type="email" name="email"
+                    required />
+                @error('email')
+                    <div class="text-red-600">{{ $message }}</div>
+                @enderror
+                <x-label for="role" :value="__('Role')" class="mt-4" />
+                <x-select wire:model.defer="role" name="role" id="role">
+                    <option value="administrator">Administrátor</option>
+                    <option value="editor">Editor</option>
+                    <option value="guest">Divák</option>
+                </x-select>
+                @error('role')
+                    <div class="text-red-600">{{ $message }}</div>
+                @enderror
+                <x-buttons.simple class="w-full mt-6 mb-2" wire:loading.attr="disabled">
+                    {{ __('Vytvořit nového uživatele') }}
+                </x-buttons.simple>
+            </form>
+            <span wire:loading wire:target="create">
+                Odesílám
+            </span>
+        </x-dialog>
     </div>
     <div class="overflow-auto">
         <table class="w-full max-w-4xl text-left">
