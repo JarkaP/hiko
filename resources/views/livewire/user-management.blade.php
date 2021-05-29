@@ -153,6 +153,6 @@
         </table>
     </div>
     <div class="w-full max-w-4xl pl-1 mt-3">
-        {{ $users->links() }}
+        {{ $users->links('pagination::tailwind') }}
     </div>
 </div>
