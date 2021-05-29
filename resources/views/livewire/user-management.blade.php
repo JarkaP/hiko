@@ -92,14 +92,15 @@
                                             <div class="text-red-600">{{ $message }}</div>
                                         @enderror
                                         <div class="block mt-4">
-                                            <x-checkbox name="status" label="{{ __('Aktivní uživatel') }}" :checked="!$user->isDeactivated()" />
+                                            <x-checkbox name="status" label="{{ __('Aktivní uživatel') }}"
+                                                :checked="!$user->isDeactivated()" />
                                         </div>
                                         <x-buttons.simple class="w-full mt-6 mb-2 bg-red-700"
                                             wire:loading.attr="disabled">
                                             {{ __('Upravit uživatele') }}
                                         </x-buttons.simple>
                                     </form>
-                                    <div wire:loading wire:target="edit">
+                                    <div wire:loading.flex wire:target="edit">
                                         <x-loading-indicator>
                                             Odesílám
                                         </x-loading-indicator>
@@ -117,14 +118,16 @@
                                 Aktivní
                             @endif
                         </td>
-                        <td class="px-4 py-2 text-sm text-right border-b">
+                        <td class="px-4 py-2 text-sm border-b">
                             <div x-data="{ deleteUserDialog: false }" @keydown.escape="deleteUserDialog = false"
                                 x-init="$watch('deleteUserDialog', toggleBodyOverflow)"
                                 x-on:user-deleted.window="deleteUserDialog = false">
-                                <button type="button" class="text-red-600" type="button"
-                                    x-on:click="deleteUserDialog = true">
-                                    {{ __('Odstranit') }}
-                                </button>
+                                <div class="text-right">
+                                    <button type="button" class="text-red-600" type="button"
+                                        x-on:click="deleteUserDialog = true">
+                                        {{ __('Odstranit') }}
+                                    </button>
+                                </div>
                                 <x-dialog title="{{ $user->name }}" slug="deleteUserDialog">
                                     <p class="text-red-600">
                                         Odstraní všechna data o uživateli! Chcete pokračovat?
