@@ -11,12 +11,7 @@
             <x-input id="password" class="block w-full mt-1" type="password" name="password" required
                 autocomplete="current-password" />
             <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="border-gray-300 rounded shadow-sm text-primary focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50"
-                        name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Zapamatovat') }}</span>
-                </label>
+                <x-checkbox name="remember_me" label="{{ __('Zapamatovat') }}" checked="false" />
             </div>
             <div class="flex flex-col items-center mt-4 space-y-2">
                 <x-buttons.simple class="w-full">

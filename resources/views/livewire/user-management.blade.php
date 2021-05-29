@@ -91,6 +91,9 @@
                                         @error('role')
                                             <div class="text-red-600">{{ $message }}</div>
                                         @enderror
+                                        <div class="block mt-4">
+                                            <x-checkbox name="status" label="{{ __('Aktivní uživatel') }}" :checked="!$user->isDeactivated()" />
+                                        </div>
                                         <x-buttons.simple class="w-full mt-6 mb-2 bg-red-700"
                                             wire:loading.attr="disabled">
                                             {{ __('Upravit uživatele') }}

@@ -56,6 +56,7 @@ class UserManagement extends Component
         $user = User::find($id);
         $user->name = $validatedData['name'];
         $user->role = $validatedData['role'];
+        $user->deactivated_at = isset($formData['status']) && $formData['status'] === 'on' ? null : now();
         $user->save();
 
         $this->message = __('Účet byl úspěšně upraven.');
